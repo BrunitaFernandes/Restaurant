@@ -6,62 +6,37 @@
 </header>
 
 <main class="main">
-  <article>
-    <h2 class="title2">Your option for you</h2>
-    <p>below are our menu options for you.</p>
-  </article>
+  <rst-article
+    title="Our options for you"
+    text="Below are our menu options for you:"
+  ></rst-article>
 
   <table class="table middle">
-      <caption class="caption">Menu options</caption>
+    <caption class="caption">{{ tableOptions.tableTitle }}</caption>
     <thead>
       <tr>
-        <th class="th">Number option</th>
-        <th class="th">Dish Type</th>
-        <th class="th">morning </th>
-        <th class="th">night </th>
+        <th *ngFor="let columnTitle of tableOptions.columsName" class="th">{{ columnTitle }}</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="td">1</td>
-        <td class="td">(entrée)</td>
-        <td class="td">eggs</td>
-        <td class="td">steak </td>
-      </tr>
-      <tr>
-        <td class="td">2</td>
-        <td class="td">(side) </td>
-        <td class="td">Toast</td>
-        <td class="td">potato</td>
-      </tr>
-      <tr>
-        <td class="td">3</td>
-        <td class="td">(drink) </td>
-        <td class="td">coffee </td>
-        <td class="td">wine </td>
-      </tr>
-      <tr>
-        <td class="td">4</td>
-        <td class="td">(dessert) </td>
-        <td class="td">Not Applicable </td>
-        <td class="td">cake </td>
+      <tr *ngFor="let row of tableOptions.rows">
+        <td *ngFor="let column of row" class="td">{{column}}</td>
       </tr>
     </tbody>
   </table>
 
   <hr>
+  <rst-article
+    title="Order"
+    text="To do your orther type the period and the number of options separated by comma"
+  ></rst-article>
 
-  <article>
-    <h2 class="title2">Order</h2>
-    <p>To do your orther type the period and the number of options separated by comma</p>
-  </article>
-
-  <form>
-    <div class="input-plus-button-component">
-      <input type="text" name="order" placeholder="Type here your order" class="input input-left-round input-text big">
-      <input type="submit" value="Send your order" class="input input-right-round input-submit">
-    </div>
-  </form>
+  <rst-send-input
+    placeholder="Type here your order"
+    name="order"
+    textButton="Send your order"
+  >
+  </rst-send-input>
 
 
   <table class="table middle">
