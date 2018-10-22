@@ -1,13 +1,12 @@
-export class AppArticle {
+import { Component, Input } from '@angular/core';
+@Component({
+  selector: 'rst-table',
+  templateUrl: './Table.html',
+  styleUrls: ['./Table.css'],
+})
 
-  constructor(private _title: String, private _text: String) { }
-
-  get title() : String {
-    return this._title;
-  }
-
-  get text() :String {
-    return this._text;
-  }
+export class Table {
+  @Input()
+  table: Object;
 
 }

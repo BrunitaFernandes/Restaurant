@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { Article } from './shared/article/Article';
 import { SendInput } from './shared/form/SendInput';
 
+
 const routes: Routes = [];
 
 @NgModule({
