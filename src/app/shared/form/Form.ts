@@ -1,4 +1,10 @@
-class Article {
+import { Component } from '@angular/core';
+@Component({
+  selector: 'rst-form',
+  templateUrl: './Form.html'
+})
+
+export class Form {
 
   constructor(private _title: String, private _text: String) { }
 
