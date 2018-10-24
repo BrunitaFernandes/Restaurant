@@ -19,4 +19,15 @@ export class AppComponent {
       [4, '(dessert)', 'Not Applicable', 'cake']
     ]
   }
+
+  tableOrders = {
+    tableTitle: "Orders",
+    columsName: ['Your Orders'],
+    rows: [
+      ['eggs, toast, coffee'],
+      ['eggs, toast, coffee, error '],
+      ['eggs, toast, coffee(x3) '],
+      ['cake']
+    ]
+  }
 }

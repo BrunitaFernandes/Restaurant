@@ -40,24 +40,15 @@
 
 
   <table class="table middle">
-    <caption class="caption">Orders</caption>
+    <caption class="caption">{{ tableOrders.tableTitle }}</caption>
     <thead>
       <tr>
-        <th class="th">Your orders</th>
+        <th *ngFor="let columnTitle of tableOrders.columsName" class="th">{{ columnTitle }}</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="td">eggs, toast, coffee</td>
-      </tr>
-      <tr>
-        <td class="td">eggs, toast, coffee, error </td>
-      </tr>
-      <tr>
-        <td class="td"> eggs, toast, coffee(x3) </td>
-      </tr>
-      <tr>
-        <td class="td">cake </td>
+      <tr *ngFor="let row of tableOrders.rows">
+        <td *ngFor="let column of row" class="td">{{column}}</td>
       </tr>
     </tbody>
   </table>

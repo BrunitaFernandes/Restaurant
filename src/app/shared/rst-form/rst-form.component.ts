@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'rst-send-input',
-  templateUrl: './SendInput.html',
-  styleUrls: ['./SendInput.css'],
+  templateUrl: './rst-form.component.html',
+  styleUrls: ['./rst-form.component.css'],
 })
 
-export class SendInput {
+export class RstForm {
   private _listOrder : Array<String>;
 
   @Input()
@@ -18,7 +19,8 @@ export class SendInput {
   @Input()
   name: String;
 
-  addOnList() : void {
+  onSubmit(f: NgForm) : void {
+    console.log(f.value); 
     alert('fui clicado');
   }
 }

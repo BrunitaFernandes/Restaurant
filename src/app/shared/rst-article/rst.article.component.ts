@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 @Component({
   selector: 'rst-article',
-  templateUrl: './Article.html',
-  styleUrls: ['./Article.css'],
+  templateUrl: './rst.article.component.html',
+  styleUrls: ['./rst.article.component.css'],
 })
 
-export class Article {
+export class RstArticle {
   @Input()
   title: String;
 

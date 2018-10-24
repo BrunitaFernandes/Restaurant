@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Article } from './shared/article/Article';
-import { SendInput } from './shared/form/SendInput';
+import { RstArticle } from './shared/rst-article/rst.article.component';
+import { RstForm } from './shared/rst-form/rst-form.component';
 
 
 const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  declarations: [Article, SendInput],
-  exports: [RouterModule, Article, SendInput]
+  declarations: [RstArticle, RstForm],
+  exports: [RouterModule, RstArticle, RstForm]
 })
 export class AppRoutingModule { }
