@@ -3,11 +3,12 @@ export class Order {
     private _orders: string;
 
     constructor(public order: string) {
-        this._timeOfDate = this.getTimeDay();
+      this._timeOfDate = this.getTimeDay();
     }
 
     private getTimeDay() {
         const separatorPositon = this.order.indexOf(',');
+        this._orders = '';
         return this.order.substr(0, separatorPositon);
     }
 
@@ -35,58 +36,72 @@ export class Order {
             });
 
             for (let i = 0; i < ordersLiteral.length; i++) {
-                const order = ordersLiteral[i];
-                const repOrder = (this._orders.match(new RegExp(order, 'g')) || []).length;
-                if (order !== 'Error') {
-                    this._orders.concat(order);
+                const orderItem = ordersLiteral[i];
+                const lastItem = ordersLiteral.length-1;
+
+                if (this._orders) {
+                    const repOrder = (this._orders.match(new RegExp(orderItem, 'g')) || []).length;
+
+                    if (repOrder > 0 && orderItem !== 'Coffee') {
+                        this._orders = `${this._orders}, Error`;
+                        break;
+                    }
+
+                    if (repOrder > 0 && orderItem === 'Coffee') {
+                        this._orders = this._orders.replace('Coffee', `Coffee (x${repOrder + 1})`);
+                    }
+                }
+
+                if (orderItem !== 'Error') {
+                    this._orders = `${this._orders}${orderItem}${lastItem == i ? '' : ','}`;
+                }
+
+                if (orderItem == 'Error'){
+                    this._orders = `${this._orders}${orderItem}${lastItem == i ? '' : ','}`;
                     break;
                 }
-
-                if (repOrder > 0 && order !== 'Coffee') {
-                    this._orders.concat('Error');
-                    break;
-                }
-
-                if (repOrder > 0 && order === 'Coffee') {
-                    this._orders.replace('Coffee', `Coffee x${repOrder + 1}`);
-                }
-
-                this._orders.concat(order);
             }
         }
 
+
         if (this.timeOfDate.toLowerCase() == 'night') {
             ordersLiteral = numberOrders.map((number): string => {
-                if (number == 1) return 'Steak, ';
-                if (number == 2) return 'Potato, ';
-                if (number == 3) return 'Wine, ';
-                if (number == 4) return 'Cake, ';
+                if (number == 1) return 'Steak';
+                if (number == 2) return 'Potato';
+                if (number == 3) return 'Wine';
+                if (number == 4) return 'Cake';
 
                 return 'Error';
             });
 
             for (let i = 0; i < ordersLiteral.length; i++) {
-                const order = ordersLiteral[i];
-                const repOrder = (this._orders.match(new RegExp(order, 'g')) || []).length;
+                const orderItem = ordersLiteral[i];
+                const lastItem = ordersLiteral.length - 1;
 
-                if (order !== 'Error') {
-                    this._orders.concat(order);
+                if (this._orders) {
+                    const repOrder = (this._orders.match(new RegExp(orderItem, 'g')) || []).length;
+
+                    if (repOrder > 0 && orderItem !== 'Potato') {
+                        this._orders = `${this._orders}, Error`;
+                        break;
+                    }
+
+                    if (repOrder > 0 && orderItem === 'Potato') {
+                        this._orders = this._orders.replace('Potato', `Potato (x${repOrder + 1})`);
+                    }
+                }
+
+                if (orderItem !== 'Error') {
+                    this._orders = `${this._orders}${orderItem}${lastItem == i ? '' : ','}`;
+                }
+
+                if (orderItem == 'Error') {
+                    this._orders = `${this._orders}${orderItem}${lastItem == i ? '' : ','}`;
                     break;
                 }
-
-                if (repOrder > 0 && order !== 'Potato') {
-                    this._orders.concat('Error');
-                    break;
-                }
-
-                if (repOrder > 0 && order === 'Potato') {
-                    this._orders.replace('Potato', `Potato x${repOrder + 1}`);
-                }
-
-                this._orders.concat(order);
             }
-
         }
+
         return this._orders;
     }
 }

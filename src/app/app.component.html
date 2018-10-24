@@ -31,13 +31,19 @@
     text="To do your orther type the period and the number of options separated by comma"
   ></rst-article>
 
-  <rst-send-input
+  <!--<rst-send-input
     placeholder="Type here your order"
     name="order"
     textButton="Send your order"
   >
-  </rst-send-input>
+</rst-send-input>-->
 
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <div class="input-plus-button-component">
+      <input type="text" name="order" ngModel required #order="ngModel" placeholder="Type here your order" class="input input-left-round input-text big">
+      <input type="submit" value="Send your order" class="input input-right-round input-submit">
+    </div>
+  </form>
 
   <table class="table middle">
     <caption class="caption">{{ tableOrders.tableTitle }}</caption>

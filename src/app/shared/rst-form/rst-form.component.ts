@@ -10,6 +10,8 @@ import { NgForm } from '@angular/forms';
 export class RstForm {
   private _listOrder : Array<String>;
 
+  model: any = {};
+
   @Input()
   placeholder : String;
 
@@ -19,8 +21,7 @@ export class RstForm {
   @Input()
   name: String;
 
-  onSubmit(f: NgForm) : void {
-    console.log(f.value); 
-    alert('fui clicado');
+  onSubmit() {
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.model))
   }
 }

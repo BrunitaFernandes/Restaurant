@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Order } from './order';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +10,14 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'Restaurant';
+
+  onSubmit(f: NgForm) {
+    console.log(f.value);
+    console.log(f.valid);
+    const order = new Order(f.value.order);
+    console.log(order);
+    console.log(order.orders);
+  }
 
   tableOptions = {
     tableTitle: "menu option",
