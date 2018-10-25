@@ -9,7 +9,7 @@ export class Order {
     private getTimeDay() {
         const separatorPositon = this.order.indexOf(',');
         this._orders = '';
-        return this.order.substr(0, separatorPositon);
+        return (this.order.substr(0, separatorPositon)).replace(/\s+/g, '');
     }
 
     get timeOfDate(): string {
@@ -27,6 +27,7 @@ export class Order {
 
 
         if (this.timeOfDate.toLowerCase() == 'morning') {
+            let rep = 1;
             ordersLiteral = numberOrders.map((number): string => {
                 if (number == 1) return 'Eggs';
                 if (number == 2) return 'Toast';
@@ -43,28 +44,32 @@ export class Order {
                     const repOrder = (this._orders.match(new RegExp(orderItem, 'g')) || []).length;
 
                     if (repOrder > 0 && orderItem !== 'Coffee') {
-                        this._orders = `${this._orders}, Error`;
+                        this._orders = `${this._orders}Error`;
                         break;
                     }
 
                     if (repOrder > 0 && orderItem === 'Coffee') {
-                        this._orders = this._orders.replace('Coffee', `Coffee (x${repOrder + 1})`);
+                        rep = rep + 1;
+                        continue;
                     }
                 }
 
                 if (orderItem !== 'Error') {
-                    this._orders = `${this._orders}${orderItem}${lastItem == i ? '' : ','}`;
+                    this._orders = `${this._orders}${orderItem}${lastItem == i ? '' : ', '}`;
                 }
 
                 if (orderItem == 'Error'){
-                    this._orders = `${this._orders}${orderItem}${lastItem == i ? '' : ','}`;
+                    this._orders = `${this._orders}${orderItem}${lastItem == i ? '' : ', '}`;
                     break;
                 }
             }
+
+            this._orders = rep > 1 ? this._orders.replace('Coffee,', `Coffee(x${rep})`) : this._orders;
         }
 
 
         if (this.timeOfDate.toLowerCase() == 'night') {
+            let rep = 1;
             ordersLiteral = numberOrders.map((number): string => {
                 if (number == 1) return 'Steak';
                 if (number == 2) return 'Potato';
@@ -82,24 +87,26 @@ export class Order {
                     const repOrder = (this._orders.match(new RegExp(orderItem, 'g')) || []).length;
 
                     if (repOrder > 0 && orderItem !== 'Potato') {
-                        this._orders = `${this._orders}, Error`;
+                        this._orders = `${this._orders}Error`;
                         break;
                     }
 
                     if (repOrder > 0 && orderItem === 'Potato') {
-                        this._orders = this._orders.replace('Potato', `Potato (x${repOrder + 1})`);
+                        rep = rep + 1;
+                        continue;
                     }
                 }
 
                 if (orderItem !== 'Error') {
-                    this._orders = `${this._orders}${orderItem}${lastItem == i ? '' : ','}`;
+                    this._orders = `${this._orders}${orderItem}${lastItem == i ? '' : ', '}`;
                 }
 
                 if (orderItem == 'Error') {
-                    this._orders = `${this._orders}${orderItem}${lastItem == i ? '' : ','}`;
+                    this._orders = `${this._orders}${orderItem}${lastItem == i ? '' : ', '}`;
                     break;
                 }
             }
+            this._orders = rep > 1 ? this._orders.replace('Potato', `Potato(x${rep})`) : this._orders;
         }
 
         return this._orders;

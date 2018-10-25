@@ -11,14 +11,6 @@ import { Order } from './order';
 export class AppComponent {
   title = 'Restaurant';
 
-  onSubmit(f: NgForm) {
-    console.log(f.value);
-    console.log(f.valid);
-    const order = new Order(f.value.order);
-    console.log(order);
-    console.log(order.orders);
-  }
-
   tableOptions = {
     tableTitle: "menu option",
     columsName: ['Number option', 'Dish Type', 'morning', 'night'],
@@ -39,5 +31,10 @@ export class AppComponent {
       ['eggs, toast, coffee(x3) '],
       ['cake']
     ]
+  }
+
+  onSubmit(f: NgForm) {
+    const order = new Order(f.value.order);
+    this.tableOrders.rows.push([order.orders]);
   }
 }
