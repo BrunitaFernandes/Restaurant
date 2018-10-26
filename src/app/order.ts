@@ -1,15 +1,33 @@
 export class Order {
     private _timeOfDate: string;
     private _orders: string;
+    private _options : any;
 
     constructor(public order: string) {
+      this._orders = '';
       this._timeOfDate = this.getTimeDay();
+      this._options = {
+        morning :[
+            {id: 1, product: 'Eggs', canRepeat: false},
+            {id: 2, product: 'Toast', canRepeat: false},
+            {id: 3, product: 'Coffee', canRepeat: true}
+        ],
+        nigth :[
+            { id: 1, product: 'Steak', canRepeat: false },
+            { id: 2, product: 'Potato', canRepeat: true },
+            { id: 3, product: 'Wine', canRepeat: false },
+            { id: 4, product: 'Cake', canRepeat: false }
+        ]
+      }
     }
 
     private getTimeDay() {
-        const separatorPositon = this.order.indexOf(',');
-        this._orders = '';
-        return (this.order.substr(0, separatorPositon)).replace(/\s+/g, '');
+        let orders = this.order.split(",");
+        return (orders[0].replace(/\s+/g, '')).toLowerCase();
+    }
+
+    get options(): any {
+        return this._options;
     }
 
     get timeOfDate(): string {
@@ -17,16 +35,13 @@ export class Order {
     }
 
     get orders(): string {
-        const separatorPositon = this.order.indexOf(',');
-        const newString = this.order.slice(separatorPositon + 1, this.order.length + 1);
-        let numberOrders = newString.split(",").map(Number);
+        let teste = this.order.split(",");
+        let numberOrders = teste.slice(1, teste.length).map(Number);
         let ordersLiteral;
-
-
         numberOrders = numberOrders.sort((a, b) => a - b);
 
 
-        if (this.timeOfDate.toLowerCase() == 'morning') {
+        if (this.timeOfDate == 'morning') {
             let rep = 1;
             ordersLiteral = numberOrders.map((number): string => {
                 if (number == 1) return 'Eggs';
@@ -68,7 +83,7 @@ export class Order {
         }
 
 
-        if (this.timeOfDate.toLowerCase() == 'night') {
+        if (this.timeOfDate == 'night') {
             let rep = 1;
             ordersLiteral = numberOrders.map((number): string => {
                 if (number == 1) return 'Steak';
